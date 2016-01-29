@@ -1,5 +1,7 @@
 # Base58
 
+[![Build Status](https://travis-ci.org/gghez/meteor-base58.svg?branch=master)](https://travis-ci.org/gghez/meteor-base58)
+
 Encode / Decode using Base58 algorithm. Simplified usage to deal with `String` as well as `Buffer` and `Array`.
 
 
