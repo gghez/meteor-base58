@@ -1,13 +1,32 @@
+Tinytest.add('Encoding result should be a string', function(test) {
+    var clear = 'Some words here.';
+    var encoded = Base58.encode(clear);
+    test.equal(typeof encoded, 'string');
+});
 
-Tinytest.add('Encode / Decode String', function (test) {
-  var clear = 'This is a clear sentence.';
+Tinytest.add('Base58 algorithm is symetrical', function(test) {
+    var clear = 'This is a clear string';
+    test.equal(Base58.decode(Base58.encode(clear)), clear);
+});
 
-  var encoded = Base58.encode(clear);
+// Buffer is only defined in NodeJS context
+if (Meteor.isServer) {
+    Tinytest.add('Allow encoding Buffer instance', function(test) {
+        var clear = 'This is a clear string';
+        var buffer = new Buffer(clear);
 
-  test.equal(typeof encoded, 'string');
+        var encodedBuffer = Base58.encode(buffer);
+        test.equal(encodedBuffer, Base58.encode(clear));
+    });
+}
 
-  var decoded = Base58.decode(encoded);
+Tinytest.add('Allow encoding byte array', function(test) {
+    var clear = 'This is a clear string';
+    var bytes = [];
+    for (var i = 0; i < clear.length; i++) {
+        bytes.push(clear.charCodeAt(i));
+    }
 
-  test.equal(decoded, clear);
-
+    var encodedBytes = Base58.encode(bytes);
+    test.equal(encodedBytes, Base58.encode(clear));
 });

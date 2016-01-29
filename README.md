@@ -20,16 +20,36 @@ meteor add gghez:base58
 
 Client or Server side, global `Base58` is available:
 
-```
+```js
 var encoded = Base58.encode('this is a clear sentence.');
 // encoded == 'oqj3pKcxTmxVvrcVqyiFSCL5LkvsXjTYBX'
+```
 
-var decoded = Base58.decode(encoded);
-// decoded == 'this is a clear sentence.'
+You can also use a `Buffer` as input for `Base58.encode` on Server where NodeJS provides `Buffer` object:
+
+```js
+if (Meteor.isServer){
+  var buffer = new Buffer('this is a clear sentence.');
+  encoded = Base58.encode(buffer);
+}
+```
+
+Decoding a Base58 string is very simple:
+
+```js
+Base58.decode('oqj3pKcxTmxVvrcVqyiFSCL5LkvsXjTYBX');
+// 'this is a clear sentence.'
+
+Base58.decode('')
 ```
 
 ## API
 
-- `Base58.encode(String|Array|Buffer)`: Returns encoded String, Array or Buffer
+### Base58.encode(source)
 
-- `Base58.decode(String|Array|Buffer)`: Returns decoded String, Array or Buffer
+Allow encoding a `String`, `Array` or `Buffer` to **Base58** string. Note that `Buffer` encoding is only available on Server (NodeJS context).
+
+### Base58.decode(encoded, format);
+
+Decode an encoded Base58 string (1st parameter), to a `String`, `Array` or `Buffer` object.
+2nd parameter is the output format: 'string' for `String`, 'array' for `Array` and 'buffer' for `Buffer`.
