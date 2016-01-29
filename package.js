@@ -1,24 +1,38 @@
 Package.describe({
-  name: 'gghez:base58',
-  version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: '',
-  // URL to the Git repository containing the source code for this package.
-  git: '',
-  // By default, Meteor will default to using README.md for documentation.
-  // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+    name: 'gghez:base58',
+    version: '1.0.0',
+    // Brief, one-line summary of the package.
+    summary: 'Encode / Decode with Base58 algorithm.',
+    // URL to the Git repository containing the source code for this package.
+    git: 'https://github.com/gghez/base58',
+    // By default, Meteor will default to using README.md for documentation.
+    // To avoid submitting documentation, set this field to null.
+    documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  api.use('ecmascript');
-  api.addFiles('base58.js');
+    // Meteor min version supported
+    api.versionsFrom('1.2.1');
+
+    // Package dependencies
+    api.use('ecmascript');
+
+    // Exported objects
+    api.export('Base58');
+
+    // Package owned files
+    api.addFiles([
+        'basex.js',
+        'base58.js'
+    ]);
 });
 
 Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('gghez:base58');
-  api.addFiles('base58-tests.js');
+    // Test depedencies
+    api.use('ecmascript');
+    api.use('tinytest');
+    api.use('gghez:base58');
+
+    // Package test files
+    api.addFiles('base58-tests.js');
 });

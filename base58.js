@@ -1,54 +1,20 @@
+var bs58alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+var bs58 = BaseX(bs58alphabet);
 
-var vals = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-var positions = {};
-for (var i=0 ; i < vals.length ; ++i) {
-    positions[vals[i]] = i;
-}
+Base58 = {
+  encode:function(source){
+    if (typeof source == 'string'){
+      var buffer = [];
+      for(var i=0;i<source.length;i++){
+        buffer.push(source.charCodeAt(i));
+      }
 
-/// decode a base58 string payload into a hex representation
-function decode_to_hexa(payload) {
-    var base = 58;
-
-    var length = payload.length;
-    var num = 0;
-    var leading_zero = 0;
-    var seen_other = false;
-    for (var i=0; i<length ; ++i) {
-        var char = payload[i];
-        var p = positions[char];
-
-        // if we encounter an invalid character, decoding fails
-        if (p === undefined) {
-            throw new Error('invalid base58 string: ' + payload);
-        }
-
-        num = num.mul(base).add(p);
-
-        if (char == '1' && !seen_other) {
-            ++leading_zero;
-        }
-        else {
-            seen_other = true;
-        }
+      return this.encode(buffer);
     }
 
-    var hex = num.toString(16);
-
-    // num.toString(16) does not have leading 0
-    if (hex.length % 2 !== 0) {
-        hex = '0' + hex;
-    }
-
-    // strings starting with only ones need to be adjusted
-    // e.g. '1' should map to '00' and not '0000'
-    if (leading_zero && !seen_other) {
-      --leading_zero;
-    }
-
-    while (leading_zero-- > 0) {
-        hex = '00' + hex;
-    }
-
-    return hex;
-}
-
+    return bs58.encode(source);
+  },
+  decode:function(source){
+    return String.fromCharCode.apply(source, bs58.decode(source));
+  }
+};

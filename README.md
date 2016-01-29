@@ -3,7 +3,7 @@
 Encode / Decode using Base58 algorithm. Simplified usage to deal with `String` as well as `Buffer` and `Array`.
 
 
-*Based on NPM Module [base-x](https://www.npmjs.com/package/base-x)*
+*Port from NPM Module [base-x](https://www.npmjs.com/package/base-x)*
 
 Used alphabet: `123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz`
 
