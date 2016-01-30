@@ -11,7 +11,7 @@ Tinytest.add('Base58 algorithm is symetrical', function(test) {
 
 // Buffer is only defined in NodeJS context
 if (Meteor.isServer) {
-    Tinytest.add('Allow encoding Buffer instance', function(test) {
+    Tinytest.add('Encoding Buffer instance', function(test) {
         var clear = 'This is a clear string';
         var buffer = new Buffer(clear);
 
@@ -20,7 +20,7 @@ if (Meteor.isServer) {
     });
 }
 
-Tinytest.add('Allow encoding byte array', function(test) {
+Tinytest.add('Encoding byte array', function(test) {
     var clear = 'This is a clear string';
     var bytes = [];
     for (var i = 0; i < clear.length; i++) {
@@ -29,4 +29,16 @@ Tinytest.add('Allow encoding byte array', function(test) {
 
     var encodedBytes = Base58.encode(bytes);
     test.equal(encodedBytes, Base58.encode(clear));
+});
+
+Tinytest.add('Decoding as byte array', function(test) {
+    var clear = 'This is a clear string';
+    var encoded = Base58.encode(clear);
+
+    var bytes = [];
+    for (var i = 0; i < clear.length; i++) {
+        bytes.push(clear.charCodeAt(i));
+    }
+
+    test.equal(Base58.decodeArray(encoded), bytes);
 });

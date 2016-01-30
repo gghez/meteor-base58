@@ -40,7 +40,9 @@ Decoding a Base58 string is very simple:
 Base58.decode('oqj3pKcxTmxVvrcVqyiFSCL5LkvsXjTYBX');
 // 'this is a clear sentence.'
 
-Base58.decode('')
+Base58.decodeArray('oqj3pKcxTmxVvrcVqyiFSCL5LkvsXjTYBX');
+// [116, 104, 105...]
+
 ```
 
 ## API
