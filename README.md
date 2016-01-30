@@ -49,9 +49,12 @@ Base58.decodeArray('oqj3pKcxTmxVvrcVqyiFSCL5LkvsXjTYBX');
 
 ### Base58.encode(source)
 
-Allow encoding a `String`, `Array` or `Buffer` to **Base58** string. Note that `Buffer` encoding is only available on Server (NodeJS context).
+Encodes a `String`, `Array` or `Buffer` to **Base58** string. Note that `Buffer` encoding is only available on Server (NodeJS context).
 
-### Base58.decode(encoded, format);
+### Base58.decode(encoded)
 
-Decode an encoded Base58 string (1st parameter), to a `String`, `Array` or `Buffer` object.
-2nd parameter is the output format: 'string' for `String`, 'array' for `Array` and 'buffer' for `Buffer`.
+Decodes an encoded Base58 string to a `String`.
+
+### Base58.decodeArray(encoded)
+
+Decodes a string into a byte array.
